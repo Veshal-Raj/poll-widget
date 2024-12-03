@@ -29,6 +29,7 @@ async function fetchPollData() {
                 let liTag = document.createElement('li');
                 liTag.textContent = option?.sport;
                 liTag.value = option?.vote;
+                liTag.id = option?.sport;
                 liTag.classList.add('option')
                 liTag.onclick = () => selectedData(option)
                 ulTag?.append(liTag);
@@ -48,11 +49,16 @@ async function fetchPollData() {
 
 function selectedData(option) {
     selectedOption = option;
+    console.log(option)
+    let sport = option?.sport;
+    document.querySelector(`#${sport}`).classList.add('active')
 }
 
 function resetSelectedOption () {
     selectedOption = null;
+    submitBtn.disabled = false;
     fetchPollData();
+    submitBtn.classList.remove('disabled')
 }
 
 
@@ -69,6 +75,7 @@ async function updatePollData() {
             });
             const responseData = await response.json();
             if (responseData?.ok) {
+                
                 const data = responseData?.data;
     
                 const question = data[0]?.Question;
@@ -85,6 +92,7 @@ async function updatePollData() {
                     let spanTag = document.createElement('span')
                     liTag.textContent = option?.sport;
                     liTag.value = option?.sport;
+                    liTag.id = option?.sport;
                     liTag.classList.add('option')
                     spanTag.classList.add('vote')
                     spanTag.textContent = option?.vote;
@@ -94,6 +102,10 @@ async function updatePollData() {
                 })
     
                 optDiv.append(ulTag);
+                submitBtn.disabled = true;
+                submitBtn.classList.add('disabled')
+                let sport = selectedOption?.sport;
+                document.querySelector(`#${sport}`).classList.add('active')
             } else {
                 alert(responseData?.msg)
                 console.log(responseData)

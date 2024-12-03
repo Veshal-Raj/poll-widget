@@ -61,6 +61,11 @@ body, html {
   background-color: #e0e0e0;
 }
 
+.active {
+  /* background-color: blue; */
+  background-color: #e0e0e0;
+}
+
 .buttons-container {
   display: flex;
   justify-content: space-between;
@@ -93,4 +98,8 @@ button {
 
 .submit-btn:hover {
   background-color: #45a049;
+}
+
+.disabled {
+  cursor: not-allowed;
 }

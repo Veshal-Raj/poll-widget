@@ -51,16 +51,15 @@ app.get('/get-poll-options', (req, res) => {
 })
 
 app.post('/update-poll-option', (req, res) => {
-    const {sport, vote} = req.body;
-
-    let data = pollData;
-    data[0].options.forEach((option) => {
+    const {sport} = req.body;
+    console.log('sport -- ', sport)
+    pollData[0].options.forEach((option) => {
         if (sport === option.sport) {
             ++option.vote
         }
     })
 
-    return res.json({ ok: true, data});
+    return res.json({ ok: true, data: pollData});
 })
 
 app.listen(PORT, (req, res) => {
